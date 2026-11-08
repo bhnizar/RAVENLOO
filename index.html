@@ -1,58 +1,72 @@
-<style>
-  html, body, #n8n-chat { height: 100%; margin: 0; }
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RAVENLoo</title>
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet">
+  <style>
+    html, body, #n8n-chat { height: 100%; margin: 0; }
+    :root {
+      --chat--color-primary: #2563eb;
+      --chat--header--background: #0f172a;
+      --chat--header--color: #ffffff;
+    }
+    .chat-messages-list { padding-right: 260px !important; }
+    .chat-message-from-bot {
+      position: relative;
+      margin-left: 52px !important;
+      max-width: 700px !important;
+      width: fit-content !important;
+    }
+    .chat-message-from-bot::before {
+      content: "";
+      position: absolute;
+      left: -52px;
+      top: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #0f172a url('avatar.png') center / cover no-repeat;
+    }
+    .chat-message-from-user { max-width: 600px !important; width: fit-content !important; }
+    #logo {
+      position: fixed;
+      right: 24px;
+      bottom: 100px;
+      width: 200px;
+      pointer-events: none;
+      z-index: 10;
+    }
+    @media (max-width: 800px) {
+      .chat-messages-list { padding-right: 24px !important; }
+      #logo { width: 110px; bottom: 90px; right: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <img id="logo" src="logo-fmgp.png" alt="FMGP">
+  <div id="n8n-chat"></div>
 
-  :root {
-    --chat--color-primary: #2563eb;
-    --chat--header--background: #0f172a;
-    --chat--header--color: #ffffff;
-    --chat--header--padding: 24px 32px;
-    --chat--messages-list--padding: 24px 32px;
-    --chat--message--bot--background: #ffffff;
-    --chat--message--user--background: #2563eb;
-  }
-
-  /* Réserve à droite la place du logo : les messages ne passent plus dessous */
-  .chat-messages-list {
-    padding-right: 260px !important;   /* = largeur du logo + marge */
-  }
-
-  /* Bulles du bot avec avatar à gauche */
-  .chat-message-from-bot {
-    position: relative;
-    margin-left: 52px !important;
-    max-width: 700px !important;
-    width: fit-content !important;
-  }
-  .chat-message-from-bot::before {
-    content: "";
-    position: absolute;
-    left: -52px;
-    top: 0;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #0f172a url('avatar.png') center / cover no-repeat;
-    box-shadow: 0 2px 6px rgba(15, 23, 42, .25);
-  }
-
-  /* Bulles de l'utilisateur */
-  .chat-message-from-user {
-    max-width: 600px !important;
-    width: fit-content !important;
-  }
-
-  /* Logo en bas à droite */
-  #logo {
-    position: fixed;
-    right: 24px;
-    bottom: 100px;
-    width: 200px;
-    pointer-events: none;
-    z-index: 10;
-  }
-
-  @media (max-width: 800px) {
-    .chat-messages-list { padding-right: 24px !important; }
-    #logo { width: 110px; bottom: 90px; right: 12px; opacity: .85; }
-  }
-</style>
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+    createChat({
+      webhookUrl: 'https://nazzoubh.app.n8n.cloud/webhook/c54b7ede-f2cf-4a55-87ce-ff2269d83810/chat',
+      target: '#n8n-chat',
+      mode: 'fullscreen',
+      showWelcomeScreen: false,
+      initialMessages: [
+        'Bonjour ! 👋',
+        'Je suis RAVENLoo, votre assistant GED pour l\'affaire F023 de la Gare de Villiers – Champigny – Bry. Comment puis-je vous aider aujourd\'hui ?'
+      ],
+      i18n: { en: {
+        title: '🐦‍⬛ RAVENLoo',
+        subtitle: 'Une question ? Nous répondons 24h/24.',
+        footer: '',
+        getStarted: 'Nouvelle conversation',
+        inputPlaceholder: 'Écrivez votre message ici !',
+      }},
+    });
+  </script>
+</body>
+</html>
