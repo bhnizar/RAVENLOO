@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assistant</title>
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet">
+  <style>
+    html, body, #n8n-chat { height: 100%; margin: 0; }
+    :root {
+      --chat--color-primary: #2563eb;
+      --chat--header--background: #0f172a;
+      --chat--header--color: #ffffff;
+    }
+    #logo { position: fixed; right: 24px; bottom: 100px; width: 160px; pointer-events: none; z-index: 10; }
+  </style>
+</head>
+<body>
+  <img id="logo" src="logo-fmgp.png" alt="FMGP">
+  <div id="n8n-chat"></div>
+
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+    createChat({
+      webhookUrl: 'COLLEZ_ICI_VOTRE_URL_DE_CHAT_N8N',
+      target: '#n8n-chat',
+      mode: 'fullscreen',
+      showWelcomeScreen: false,
+      initialMessages: ['Bonjour ! Je suis REVENdex, votre assistant GED. Comment puis-je vous aider ?'],
+      i18n: { en: {
+        title: 'REVENdex',
+        subtitle: 'Une question ? Nous répondons 24h/24.',
+        footer: '',
+        getStarted: 'Nouvelle conversation',
+        inputPlaceholder: 'Écrivez votre message…',
+      }},
+    });
+  </script>
+</body>
+</html>
