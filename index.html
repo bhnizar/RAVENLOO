@@ -3,16 +3,55 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Assistant</title>
+  <title>RAVENLoo</title>
   <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet">
   <style>
     html, body, #n8n-chat { height: 100%; margin: 0; }
+
     :root {
+      /* Couleurs et espacements du widget */
       --chat--color-primary: #2563eb;
       --chat--header--background: #0f172a;
       --chat--header--color: #ffffff;
+      --chat--header--padding: 24px 32px;
+      --chat--messages-list--padding: 24px 32px;
+      --chat--message--bot--background: #ffffff;
+      --chat--message--user--background: #2563eb;
+
+      /* Avatar du bot : emoji corbeau par défaut.
+         Pour utiliser une image, remplacez par : url('avatar.png') */
+      --avatar: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='50' font-size='70' text-anchor='middle' dominant-baseline='central'%3E🐦‍⬛%3C/text%3E%3C/svg%3E");
     }
-    #logo { position: fixed; right: 24px; bottom: 100px; width: 160px; pointer-events: none; z-index: 10; }
+
+    /* Message du bot : place pour l'avatar à gauche */
+    .chat-message-from-bot {
+      position: relative;
+      margin-left: 50px !important;
+    }
+    .chat-message-from-bot::before {
+      content: "";
+      position: absolute;
+      left: -50px;
+      bottom: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--avatar) center / 70% no-repeat, #0f172a;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, .25);
+    }
+
+    /* Logo en bas à droite (ajustez width pour la taille) */
+    #logo {
+      position: fixed;
+      right: 24px;
+      bottom: 100px;
+      width: 200px;
+      pointer-events: none;
+      z-index: 10;
+    }
+    @media (max-width: 600px) {
+      #logo { width: 110px; bottom: 90px; right: 12px; }
+    }
   </style>
 </head>
 <body>
@@ -26,13 +65,16 @@
       target: '#n8n-chat',
       mode: 'fullscreen',
       showWelcomeScreen: false,
-      initialMessages: ['Bonjour ! Je suis RAVENLoo, votre assistant GED. Comment puis-je vous aider ?'],
+      initialMessages: [
+        'Bonjour ! 👋',
+        'Je suis RAVENLoo, votre assistant GED pour l\'affaire F023 de la Gare de Villiers – Champigny – Bry. Comment puis-je vous aider aujourd\'hui ?'
+      ],
       i18n: { en: {
-        title: 'RAVENLoo',
+        title: '🐦‍⬛ RAVENLoo',
         subtitle: 'Une question ? Nous répondons 24h/24.',
         footer: '',
         getStarted: 'Nouvelle conversation',
-        inputPlaceholder: 'Écrivez votre message…',
+        inputPlaceholder: 'Écrivez votre message ici !',
       }},
     });
   </script>
