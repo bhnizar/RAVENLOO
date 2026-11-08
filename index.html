@@ -7,19 +7,26 @@
 <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet">
 <style>
 html, body, #n8n-chat { height: 100%; margin: 0; }
+
 :root {
   --chat--color-primary: #2563eb;
   --chat--header--background: #0f172a;
   --chat--header--color: #ffffff;
 }
-.chat-messages-list { padding-right: 260px !important; }
-.chat-message-from-bot {
+
+/* Réserve à droite la place du logo */
+[class*="chat-messages-list"] {
+  padding-right: 400px !important;
+}
+
+/* Messages du bot + avatar */
+[class*="chat-message-from-bot"] {
   position: relative;
   margin-left: 52px !important;
   max-width: 700px !important;
   width: fit-content !important;
 }
-.chat-message-from-bot::before {
+[class*="chat-message-from-bot"]::before {
   content: "";
   position: absolute;
   left: -52px;
@@ -28,19 +35,29 @@ html, body, #n8n-chat { height: 100%; margin: 0; }
   height: 40px;
   border-radius: 50%;
   background: #0f172a url('avatar.png') center / cover no-repeat;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, .25);
 }
-.chat-message-from-user { max-width: 600px !important; width: fit-content !important; }
+
+/* Messages de l'utilisateur */
+[class*="chat-message-from-user"] {
+  max-width: 600px !important;
+  width: fit-content !important;
+}
+
+/* Logo en bas à droite */
 #logo {
   position: fixed;
   right: 24px;
   bottom: 100px;
-  width: 200px;
+  width: 340px;
   pointer-events: none;
   z-index: 10;
 }
+
+/* Mobile */
 @media (max-width: 800px) {
-  .chat-messages-list { padding-right: 24px !important; }
-  #logo { width: 110px; bottom: 90px; right: 12px; }
+  [class*="chat-messages-list"] { padding-right: 24px !important; }
+  #logo { width: 140px; bottom: 90px; right: 12px; opacity: .85; }
 }
 </style>
 </head>
